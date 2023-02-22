@@ -38,3 +38,18 @@ functio() {.....}
 - npm:node package manager
 - ultilizar o node.js
 - pemitir a configuraçao rapida e facil de ambiente e plugins do node.js
+
+## Instalações de pacotes
+
+- Rodar o node.js 
+- Agora na pasta do projeto,adicionar npm: npm -y
+- instalar o gulp-cli (comand line interface) globalmente.npm install gulp-cli -g
+- criar o gulpfile.js
+
+## Rodar o projeto
+
+- Execurtar o comandor:
+´´´´ 
+   npm install
+   
+´´´´
