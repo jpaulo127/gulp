@@ -45,7 +45,12 @@ functio() {.....}
 - Agora na pasta do projeto,adicionar npm: npm -y
 - instalar o gulp-cli (comand line interface) globalmente.npm install gulp-cli -g
 - criar o gulpfile.js
-
+## Trabalhando com Gulp
+- Baseado em funções: tasks
+- Organização do projeto
+- Otimização de arquivos
+- Mesclagem e Minificação de CSS e JS
+- Diminuição do tamanho (bytes) de imagens
 ## Rodar o projeto
 
 - Execurtar o comandor:
