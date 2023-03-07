@@ -10,7 +10,11 @@ const stripCss = require('gulp-strip-css-comments')
 const htmlmin = require('gulp-htmlmin')
 const babel = require('gulp-babel')
 const browserSync = require('browser-sync').create()
+const sass = require('gulp-sass')(require('node-sass'))
+const { pipe } = require('stdout-stream')
+const { contains } = require('jquery')
 const reload = browserSync.reload
+
 
 function tarefasCSS(cb) {
 
@@ -19,19 +23,19 @@ function tarefasCSS(cb) {
             './node_modules/@fortawesome/fontawesome-free/css/fontawesome.css',
             './vendor/owl/css/owl.css',
             './vendor/jquery-ui/jquery-ui.css',
-            './src/css/style.css'
+           
         ])
-
         .pipe(babel({
-                     comments: false,
-                     presets: ['@babel/env']
+            comments: false,
+            presets: ['@babel/env']
+
+}))  
+
         
-        }))           
-        
-        // remove comentários
-        .pipe(concat('styles.css'))         // mescla arquivos
+        .pipe(stripCss())                  //remover comentario
+        .pipe(concat('libs.css'))         // mescla arquivos
         .pipe(cssmin())                     // minifica css
-        .pipe(rename({ suffix: '.min'}))    // styles.min.css
+        .pipe(rename({ suffix: '.min'}))    // libs.min.css
         .pipe(gulp.dest('./dist/css'))      // cria arquivo em novo diretório
 
         cb()
@@ -55,6 +59,18 @@ function tarefasJS(calback){
         .pipe(gulp.dest('./dist/js'))       // cria arquivo em novo diretório
 
         return calback()
+}
+
+function tarefasSASS(cb) {
+
+         gulp.src('./src/scss/**/*.scss')
+        .pipe(concat('styles.css')) 
+        .pipe(sass()) //transformar o sass em css
+        .pipe(gulp.dest('./dist/css'))
+
+
+        cb()
+
 }
 
 
@@ -104,10 +120,11 @@ function tarefasHTML(calback) {
             return cb()
         }
 
-        const process = series( tarefasHTML, tarefasJS, tarefasCSS, end)
+        const process = parallel( tarefasHTML, tarefasJS, tarefasCSS, tarefasSASS, end)
   
   exports.styles = tarefasCSS
   exports.scripts = tarefasJS
   exports.images = tarefasImagem
+  exports.sass = tarefasSASS
   
   exports.default = process

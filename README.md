@@ -55,7 +55,7 @@ functio() {.....}
 
 - Execurtar o comandor:
 ´´´´ 
-   npm install
-   gulp serve
+   -npm install
+   -gulp serve
    
 ´´´´
